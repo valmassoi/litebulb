@@ -1,12 +1,13 @@
 const passport = require('passport')
 const JwtStrategy = require('passport-jwt').Strategy
+const TwitterStrategy = require('passport-twitter').Strategy
 const ExtractJwt = require('passport-jwt').ExtractJwt
 const LocalStrategy = require('passport-local')
 const User = require('../models/user')
 
 if (process.env.NODE_ENV !== 'production')
   require('dotenv').config()
-const { SECRET_KEY } = process.env
+const { SECRET_KEY, TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET, TOKEN, TOKEN_SECRET } = process.env
 
 
 // create local Strategy
@@ -48,6 +49,28 @@ const jwtLogin = new JwtStrategy(jwtOptions, (payload, done) => { //payload is d
   })
 })
 
-//tell passport to use this Strategy
+//options for twitter Strategy
+const twitterOptions = {
+  consumerKey: TWITTER_CONSUMER_KEY,
+  consumerSecret: TWITTER_CONSUMER_SECRET,
+  callbackURL: 'http://192.168.1.108:8081/auth/twitter/callback'
+}
+//create twitter Strategy
+const twitterLogin = new TwitterStrategy(twitterOptions,
+  function(TOKEN, TOKEN_SECRET, profile, cb) {
+    console.log(profile.id, profile.username, profile.displayName, profile._json.profile_image_url)
+    // User.findById({ twitterId: profile.id }, (err, user) => {
+    //   console.log(user);
+    //   if (user)
+    //     cb(err, user)
+    //   else
+    //     cb(err, false)
+      return cb(null, profile)
+    // })
+  }
+)
+
+//tell passport to use these Strategies
+passport.use(twitterLogin)
 passport.use(jwtLogin)
 passport.use(localLogin)

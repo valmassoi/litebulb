@@ -7,6 +7,7 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const path = require('path')
+const passport = require('passport')
 
 const app = express()
 
@@ -17,11 +18,17 @@ app.use(express.static(__dirname+'/src/'))
 if (process.env.NODE_ENV !== 'production'){
   const morgan = require('morgan')
   app.use(morgan('dev')) //combined short tiny
+  require('dotenv').config()
 }
+const { SECRET_KEY } = process.env
 app.use(cors())
 // app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json({ type: '*/*' }))
 app.enable('trust proxy')
+
+app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }))
+app.use(passport.initialize())
+app.use(passport.session())
 router(app)
 
 

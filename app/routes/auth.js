@@ -12,6 +12,13 @@ module.exports = function(app) {
     res.send({ message: 'testing secret code is test123' })
   })
 
+  app.get('/auth/twitter', passport.authenticate('twitter'))
+
+  app.get('/auth/twitter/callback', passport.authenticate('twitter', { failureRedirect: '/signin' }), (req, res) => {
+    // Successful authentication, redirect to dashboard
+    res.redirect('/dashboard')
+  })
+
   app.post('/profile', requireAuth, (req, res, next) => {//change to PUT?
     Authentication.profile(req.user.email, req.body.formProps, res, next)
   })

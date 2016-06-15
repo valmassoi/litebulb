@@ -6,6 +6,7 @@ if (process.env.NODE_ENV !== 'production')
 const { SECRET_KEY } = process.env
 
 function tokenForUser(user) {
+  console.log("TOKEN");
   const timestamp = Date.now()
   return jwt.encode({ sub: user.id, iat: timestamp }, SECRET_KEY) //dont use email,,,, sub is the subject of the token,,,, iat: issue at time
 }
