@@ -81,7 +81,7 @@ class Nav extends Component {
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-              <li><Link to="/library" onClick={this.setCollapsed.bind(this)}>All Bulbs</Link></li>
+              <li><Link to="/bulbs" onClick={this.setCollapsed.bind(this)}>All Bulbs</Link></li>
               {this.renderLinks()}
 
             </ul>

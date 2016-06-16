@@ -8,6 +8,7 @@ import Signin from "./pages/Signin"
 import Settings from "./pages/Settings"
 import RequireAuth from './components/require_auth'
 import NotFound from './pages/404'
+import Bulbs from './pages/Bulbs'
 
 export default (
   <Route path="/" component={Layout}>
@@ -15,6 +16,7 @@ export default (
     <Route path="signup" component={Signup} />
     <Route path="signin" component={Signin} />
     <Route path="settings" component={RequireAuth(Settings)} />
+    <Route path="bulbs" component={Bulbs} />
     <Route path="*" component={NotFound} />
   </Route>
 )
