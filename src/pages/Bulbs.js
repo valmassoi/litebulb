@@ -9,7 +9,7 @@ class Bulbs extends Component {
       <div>
         Bulbs
         <BulbList />
-        <NewBulb />
+        {/*<NewBulb />*/}
       </div>
 
     )

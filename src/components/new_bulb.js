@@ -1,21 +1,30 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import checkImgUrl from '../utilities/checkImgUrl'
+import * as bulbActions from '../actions/bulb'
+
+//Bulb final Model: { title, img, owner, likes }
+
+const badImg = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/ProhibitionSign2.svg/2000px-ProhibitionSign2.svg.png"
 
 class NewBulb extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        title: "",
-        img: "http://3.bp.blogspot.com/-j6omUq-pnHQ/UWQWwJ-hnmI/AAAAAAAAJAA/RkGoDfhobks/s1600/It's+Temporary.png"
-      }
+      title: "",
+      img: "http://3.bp.blogspot.com/-j6omUq-pnHQ/UWQWwJ-hnmI/AAAAAAAAJAA/RkGoDfhobks/s1600/It's+Temporary.png"
+    }
   }
 
   submitForm(e) {
     e.preventDefault()
     let { title, img } = this.state
-    if (checkImgUrl(img))
+    if(checkImgUrl(img) && img!=badImg) {
       console.log("allow save", title, img)
-    //TODO save to db
+      this.props.addBulb({ title, img })
+    }
+    else
+      console.log("warn user")
   }
 
   handleTitleChange(e) {
@@ -25,24 +34,40 @@ class NewBulb extends Component {
   handleImgChange(e) {
     let img = e.target.value
     if (!checkImgUrl(img))
-      img = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/ProhibitionSign2.svg/2000px-ProhibitionSign2.svg.png"
+      img = badImg
     this.setState({ img })
   }
 
   render() {
     let { img } = this.state
+
+    let imgContainer = {
+      float: 'left !important',
+      position: 'relative',
+      backgroundColor: 'black',
+      width: '300px',
+      height: '300px'
+    }
+    let imgStyle = {
+      position: 'absolute',
+      top: '50%',
+      transform: 'translateY(-50%)',
+      width: '300px',
+      maxHeight: '300px'
+    }
+    let formStyle = {
+      float: 'left !important',
+    }
     let formBtns = {
       float: 'right !important',
       marginRight: '16px'
     }
-    let imgStyle = {//HACK, make responsive
-      width: '300px',
-      height: '300px'
-    }
     return (
       <div>
-        <img src={img} style={imgStyle} />
-        <div class="form-container container-fluid centered">
+        <div style={imgContainer}>
+          <img src={img} style={imgStyle} />
+        </div>
+        <div class="form-container container-fluid centered" style={formStyle}>
          <form class="form-horizontal" onSubmit={this.submitForm.bind(this)}>
            <fieldset>
              <legend>Create a new bulb</legend>
@@ -70,7 +95,6 @@ class NewBulb extends Component {
       </div>
     )
   }
-
 }
 
-export default NewBulb
+export default connect(null, bulbActions)(NewBulb)
