@@ -26,7 +26,7 @@ app.use(cors())
 app.use(bodyParser.json({ type: '*/*' }))
 app.enable('trust proxy')
 
-app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }))
+app.use(require('express-session')({ secret: SECRET_KEY, resave: true, saveUninitialized: true }))
 app.use(passport.initialize())
 app.use(passport.session())
 router(app)

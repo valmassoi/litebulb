@@ -13,10 +13,9 @@ import { AUTH_USER } from './actions/types'
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore)
 const store = createStoreWithMiddleware(reducers)
 
-const token = localStorage.getItem('token'),
-      email = localStorage.getItem('email')
-if (token && email)
-  store.dispatch({ type: AUTH_USER, payload: { email, profile:'' } })
+const token = localStorage.getItem('twitter_token')
+if (token)
+  store.dispatch({ type: AUTH_USER, payload: { token } })
 
 const app = document.getElementById('app')
 

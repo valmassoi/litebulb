@@ -13,27 +13,26 @@ class Nav extends Component {
   }
 
   componentWillMount() {
-    this.props.authActions.getProfile()
+    // this.props.authActions.getProfile()
   }
 
   renderLinks() {
     const { authenticated, profile, email } = this.props
 
     if(!authenticated) {
-      return [
-        <li class={this.loginClass} key={1}><Link to="/signin" onClick={this.setCollapsed.bind(this)}>Login</Link></li>,
-
-        <li key={2}><Link to="/signup" onClick={this.setCollapsed.bind(this)}>Signup</Link></li>
-      ]
+      return (
+        <li class={this.loginClass} key={1}>
+          <a href="http://192.168.1.108:8081/auth/twitter" onClick={this.setCollapsed.bind(this)}>Login / Signup</a>
+        </li>
+      )
     }
     else {
       return (
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{!profile?email.split("@")[0]:profile.name?profile.name:email.split("@")[0]}
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">hi
           <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><Link to="dashboard" onClick={this.setCollapsed.bind(this)}>Dashboard</Link></li>
-            <li><Link to="settings" onClick={this.setCollapsed.bind(this)}>Settings</Link></li>
             <li role="separator" class="divider"></li>
             <li><a href="#" onClick={this.logout.bind(this)}>Logout</a></li>
           </ul>
