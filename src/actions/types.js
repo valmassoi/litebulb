@@ -7,3 +7,5 @@ export const GET_PROFILE = 'get_profile'
 
 //bulb
 export const ADD_BULB = 'add_bulb'
+export const DELETE_BULB = 'delete_bulb'
+export const LIKE_BULB = 'like_bulb'

@@ -1,20 +1,17 @@
 import React, { Component } from 'react'
 import BulbList from '../components/bulb_list'
-import NewBulb from '../components/new_bulb' //HACK
+
 
 class Bulbs extends Component {
 
   render() {
     return (
       <div>
-        Bulbs
-        <BulbList />
-        {/*<NewBulb />*/}
+        <h1>Bulbs</h1>
+        <BulbList mode="all" />
       </div>
-
     )
   }
-
 }
 
 export default Bulbs

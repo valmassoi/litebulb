@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import checkImgUrl from '../utilities/checkImgUrl'
 import * as bulbActions from '../actions/bulb'
 
-//Bulb final Model: { title, img, owner, likes }
+//Bulb final Model: { title:String, img:String, owner:String, likes:Array }
 
 const badImg = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/ProhibitionSign2.svg/2000px-ProhibitionSign2.svg.png"
 
@@ -25,6 +25,11 @@ class NewBulb extends Component {
     }
     else
       console.log("warn user")
+    this.props.close()
+  }
+
+  reset() {
+    this.props.close()
   }
 
   handleTitleChange(e) {
@@ -42,21 +47,23 @@ class NewBulb extends Component {
     let { img } = this.state
 
     let imgContainer = {
-      float: 'left !important',
       position: 'relative',
       backgroundColor: 'black',
-      width: '300px',
+      width: '100%',
       height: '300px'
     }
     let imgStyle = {
       position: 'absolute',
       top: '50%',
-      transform: 'translateY(-50%)',
-      width: '300px',
+      transform: 'translateY(-50%) translateX(-50%)',
+      margin: 'auto',
+      left: '50%',
+      maxWidth: '100%',
       maxHeight: '300px'
     }
     let formStyle = {
-      float: 'left !important',
+      clear: 'both',
+      marginTop: '20px'
     }
     let formBtns = {
       float: 'right !important',
@@ -68,9 +75,9 @@ class NewBulb extends Component {
           <img src={img} style={imgStyle} />
         </div>
         <div class="form-container container-fluid centered" style={formStyle}>
-         <form class="form-horizontal" onSubmit={this.submitForm.bind(this)}>
+         <form class="form-horizontal" onSubmit={this.submitForm.bind(this)}
+         >
            <fieldset>
-             <legend>Create a new bulb</legend>
              <div class="form-group">
                <label class="col-lg-2 control-label"><b>Title</b></label>
                <div class="col-lg-10">
@@ -85,8 +92,14 @@ class NewBulb extends Component {
              </div>
              <div class="form-group">
                <div style={formBtns}>
-                 <button type="reset" class="btn btn-default">Reset</button>
-                 <button type="submit" style={{marginLeft: '10px'}} class="btn btn-primary">Create</button>
+                <button
+                  type="reset"
+                  onClick={this.reset.bind(this)}
+                  class="btn btn-default"
+                >
+                  Cancel
+                </button>
+                <button type="submit" style={{marginLeft: '10px'}} class="btn btn-primary">Create</button>
                </div>
              </div>
            </fieldset>

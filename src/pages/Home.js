@@ -23,8 +23,8 @@ export default class Home extends Component {
         </Link>
         <h1>Welcome to Litebulb</h1>
         <ul>
-          <li>Add all of your brite ideas as bulbs</li>
-          <li>See others' bulbs</li>
+          <li>Save all of your brite ideas as bulbs: a title and image</li>
+          <li>See and like others' bulbs</li>
           <li>...</li>
         </ul>
       </div>

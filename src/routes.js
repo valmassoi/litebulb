@@ -5,7 +5,7 @@ import Home from "./pages/Home"
 import Layout from "./components/Layout"
 import Signup from "./pages/Signup"
 import Signin from "./pages/Signin"
-import Settings from "./pages/Settings"
+import Dashboard from "./pages/Dashboard"
 import RequireAuth from './components/require_auth'
 import NotFound from './pages/404'
 import Bulbs from './pages/Bulbs'
@@ -15,7 +15,8 @@ export default (
     <IndexRoute component={Home} />
     <Route path="signup" component={Signup} />
     <Route path="signin" component={Signin} />
-    <Route path="settings" component={RequireAuth(Settings)} />
+    <Route path="dashboard" component={Dashboard} />
+    {/*<Route path="dashboard" component={RequireAuth(Dashboard)} />*/}
     <Route path="bulbs" component={Bulbs} />
     <Route path="*" component={NotFound} />
   </Route>
