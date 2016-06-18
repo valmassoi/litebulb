@@ -1,4 +1,4 @@
-import { AUTH_USER, UNAUTH_USER, AUTH_ERROR, UPDATE_PROFILE, GET_PROFILE } from '../actions/types'
+import { AUTH_USER, UNAUTH_USER, AUTH_ERROR, GET_PROFILE } from '../actions/types'
 
 export default function(state = {}, action) {
   switch (action.type) {
@@ -6,11 +6,9 @@ export default function(state = {}, action) {
       console.log("AUTHH");
       return { ...state, authenticated: true }
     case UNAUTH_USER:
-      return { ...state, authenticated: false, error: '', email: '', profile: ''}
+      return { ...state, authenticated: false, error: '', profile: ''}
     case AUTH_ERROR:
       return { ...state, error: action.payload }
-    case UPDATE_PROFILE:
-      return { ...state, message: action.payload.message, profile: action.payload.profile }
     case GET_PROFILE:
       return { ...state, profile: action.payload }
   }

@@ -4,20 +4,15 @@ import { AUTH_USER, AUTH_ERROR, UNAUTH_USER, UPDATE_PROFILE, GET_PROFILE } from 
 
 let API_URL = 'http://localhost:8081' // http://localhost:8081
 
-// export function twitterAuth() {
-//   return function(dispatch) {
-//   let url = `${API_URL}/auth/twitter`
-//   axios.get(url)
-//     .then(data => {
-//       console.log(data);
-//       if(data.oauth_token) {
-//         localStorage.setItem('twitter_token', data.oauth_token)
-//       }
-//       if(data.tokenUrl)
-//         window.location.href = data.tokenUrl
-//     })
-//   }
-// }
+export function twitterAuth() {
+  return function(dispatch) { // thunk
+    const token = localStorage.getItem('twitter_token')
+    if (token)
+      browserHistory.push('/dashboard')
+    else
+      window.location = 'http://192.168.1.108:8081/auth/twitter'
+  }
+}
 
 export function authUser({ token }) {
   return function(dispatch) { // thunk

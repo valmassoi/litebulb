@@ -14,7 +14,6 @@ export default (
     <IndexRoute component={Home} />
     <Route path="signin" component={Signin} />
     <Route path="signin?twitter_token=:token" component={Signin} />
-    {/*<Route path="dashboard" component={Dashboard} />*/}
     <Route path="dashboard" component={RequireAuth(Dashboard)} />
     <Route path="bulbs" component={Bulbs} />
     <Route path="*" component={NotFound} />

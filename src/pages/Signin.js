@@ -1,7 +1,6 @@
 import React, { Component } from "react"
 import { reduxForm } from 'redux-form'
 import * as actions from '../actions/auth'
-import Twitter from '../components/twitter'
 
 class Signin extends Component {
 
@@ -21,22 +20,12 @@ class Signin extends Component {
     }
   }
 
-  renderAlert() {
-    if(this.props.errorMessage){
-      return (
-        <div className="alert alert-danger">
-          <strong>Oops!</strong> {this.props.errorMessage}
-        </div>
-      )
-    }
-  }
-
   render() {
     const { handleSubmit, fields: { email, password }} = this.props
 
     return(
       <div>
-        <Twitter />
+        <h1>Please Use Login / Signup Button</h1>
         <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
           <fieldset className="form-group">
             <label>Email:</label>
@@ -46,7 +35,6 @@ class Signin extends Component {
             <label>Password:</label>
             <input {...password} type="password" placeholder="Please use twitter login" className="form-control" />
           </fieldset>
-          {this.renderAlert()}
           <button action="submit" className="btn btn-primary">Login</button>
         </form>
       </div>

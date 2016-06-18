@@ -16,29 +16,17 @@ exports.signin = (req, res, next) => {
   res.send({ token: tokenForUser(req.user), profile: req.user.profile })
 }
 
-exports.signup = (req, res, next) => {
-  const { email, password } = req.body
-  if (!email || !password) {
-    return res.status(422).send({ error: 'Must provide email and password' })
-  }
-
-  User.findOne({ email }, (err, existingUser) => { //see if user with given email exists
-    if(err) {return next(err)}
-
-    if(existingUser) { //if does: return error
-      return res.status(422).send({ error: 'Email is in use' })
-    }
+exports.signup = (profile) => {
 
     const user = new User({ //else create and save record
-      email,
-      password
+      profile
     })
 
     user.save((err) => {
       if(err) {return next(err)}
-      res.json({ token: tokenForUser(user) })
+      // res.json({ token: tokenForUser(user) })
     })
-  })
+
 }
 
 exports.profile  = (email, formProps, res, next) => {

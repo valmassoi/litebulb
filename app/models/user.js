@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt-nodejs')
 
 // Define our model
 const userSchema = new Schema({
-  twitterId: { type: String, unique: true }
+  profile: { id:{ type: String, unique: true }, username:String, displayName:String, img:String }
 })
 
 // On save Hook, encrypt password

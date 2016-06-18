@@ -4,6 +4,7 @@ const TwitterStrategy = require('passport-twitter').Strategy
 const ExtractJwt = require('passport-jwt').ExtractJwt
 const LocalStrategy = require('passport-local')
 const User = require('../models/user')
+const Authentication = require('../controllers/authentication')
 
 let localUrl = ''
 if (process.env.NODE_ENV !== 'production'){
@@ -61,14 +62,19 @@ const twitterOptions = {
 //create twitter Strategy
 const twitterLogin = new TwitterStrategy(twitterOptions,
   function(TOKEN, TOKEN_SECRET, profile, cb) {
-    console.log(profile.id, profile.username, profile.displayName, profile._json.profile_image_url)
-    User.findById({ twitterId: profile.id }, (err, user) => {
+    const userProfile = { id:profile.id, username:profile.username, displayName:profile.displayName, img:profile._json.profile_image_url }
 
-      if (user)
+    User.findOne({ profile: profile.id }, (err, user) => {
+      if(err) { return cb(err, false) }
+      if (user) {
         console.log(user)
-      else
+        return cb(null, profile)
+      }
+      else {
         console.log("no user")
-      return cb(null, profile)
+        Authentication.signup(userProfile)//todo add more info
+        return cb(null, profile)
+      }
     })
   }
 )
