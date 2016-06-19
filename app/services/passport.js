@@ -2,7 +2,6 @@ const passport = require('passport')
 const JwtStrategy = require('passport-jwt').Strategy
 const TwitterStrategy = require('passport-twitter').Strategy
 const ExtractJwt = require('passport-jwt').ExtractJwt
-const LocalStrategy = require('passport-local')
 const User = require('../models/user')
 const Authentication = require('../controllers/authentication')
 
@@ -14,31 +13,10 @@ if (process.env.NODE_ENV !== 'production'){
 const { SECRET_KEY, TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET, TOKEN, TOKEN_SECRET } = process.env
 
 
-// create local Strategy
-const localOptions = { usernameField: 'email' }
-const localLogin = new LocalStrategy(localOptions, (email, password, done) => {
-  // verify email and password
-  User.findOne({ email }, (err, user) => {
-    if(err)
-      return done(err)
-    if(!user)
-      return done(null, false)
-
-    user.comparePassword(password, (err, isMatch) => {
-      if(err)
-        return done(err)
-      if(!isMatch)
-        return done(null, false)
-      return done(null, user)
-    })
-  })
-
-})
-
 // options for jwt Strategy
 const jwtOptions = {
   jwtFromRequest: ExtractJwt.fromHeader('authorization'),
-  secretOrKey: SECRET_KEY
+  secretOrKey: TWITTER_CONSUMER_SECRET//SECRET_KEY
 }
 
 //create jwt Strategy
@@ -78,16 +56,20 @@ const twitterLogin = new TwitterStrategy(twitterOptions,
     })
   }
 )
-passport.serializeUser(function(user, cb) {
-  cb(null, user);
+passport.serializeUser(function(user, done) {
+  done(null, user);
 });
 
-passport.deserializeUser(function(obj, cb) {
-  cb(null, obj);
+passport.deserializeUser(function(id, done) {
+  console.log("id:", id);
+  User.findById(id, function(err, user){
+    console.log(user);
+      if(!err) done(null, user);
+      else done(err, null);
+    });
 });
 
 
 //tell passport to use these Strategies
 passport.use(twitterLogin)
 passport.use(jwtLogin)
-passport.use(localLogin)

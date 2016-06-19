@@ -6,7 +6,6 @@ const passport = require('passport')
 const url  = require('url')
 
 const requireAuth = passport.authenticate('jwt', { session: false })//false is to use tokens over cookies
-const requireSignin = passport.authenticate('local', { session: false })
 
 module.exports = function(app) {
   app.get('/', requireAuth, (req, res) => {
@@ -22,14 +21,14 @@ module.exports = function(app) {
     res.redirect('http://192.168.1.108:8080/signin?twitter_token='+query.oauth_token) //TODO
   })
 
-  app.post('/profile', requireAuth, (req, res, next) => {//change to PUT?
-    Authentication.profile(req.user.email, req.body.formProps, res, next)
+  app.post('/profile', requireAuth, (req, res, next) => {
+    // Authentication.profile(req.user.email, null, res, next)
   })
 
   app.get('/profile', requireAuth, (req, res, next) => {
-    Authentication.profile(req.user.email, null, res, next)
+    console.log("req");
+    res.send({ message: 'testing profile' })
+    // Authentication.profile(req.user.email, null, res, next)
   })
 
-  app.post('/signin', requireSignin, Authentication.signin)
-  app.post('/signup', Authentication.signup)
 }

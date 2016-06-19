@@ -23,7 +23,7 @@ exports.signup = (profile) => {
     })
 
     user.save((err) => {
-      if(err) {return next(err)}
+      if(err) {console.log(err);}
       // res.json({ token: tokenForUser(user) })
     })
 
