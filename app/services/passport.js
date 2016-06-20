@@ -12,25 +12,6 @@ if (process.env.NODE_ENV !== 'production'){
 }
 const { SECRET_KEY, TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET, TOKEN, TOKEN_SECRET } = process.env
 
-
-// options for jwt Strategy
-const jwtOptions = {
-  jwtFromRequest: ExtractJwt.fromHeader('authorization'),
-  secretOrKey: TWITTER_CONSUMER_SECRET//SECRET_KEY
-}
-
-//create jwt Strategy
-const jwtLogin = new JwtStrategy(jwtOptions, (payload, done) => { //payload is decoded token
-  //see if user id in payload exists in db, then call done with user object, else done with no user
-  User.findById(payload.sub, (err, user) => {
-    if(err) { return done(err, false) }
-    if (user)
-      done(null, user)
-    else
-      done(null, false)
-  })
-})
-
 //options for twitter Strategy
 const twitterOptions = {
   consumerKey: TWITTER_CONSUMER_KEY,
@@ -40,30 +21,31 @@ const twitterOptions = {
 //create twitter Strategy
 const twitterLogin = new TwitterStrategy(twitterOptions,
   function(TOKEN, TOKEN_SECRET, profile, cb) {
+    console.log(profile);
     const userProfile = { id:profile.id, username:profile.username, displayName:profile.displayName, img:profile._json.profile_image_url }
 
     User.findOne({ profile: profile.id }, (err, user) => {
       if(err) { return cb(err, false) }
       if (user) {
-        console.log(user)
+        // console.log(user)
         return cb(null, profile)
       }
       else {
         console.log("no user")
-        Authentication.signup(userProfile)//todo add more info
+        Authentication.signup(userProfile)
         return cb(null, profile)
       }
     })
   }
 )
-passport.serializeUser(function(user, done) {
-  done(null, user);
+passport.serializeUser(function(token, done) {
+  done(null, token);
 });
 
-passport.deserializeUser(function(id, done) {
-  console.log("id:", id);
-  User.findById(id, function(err, user){
-    console.log(user);
+passport.deserializeUser(function(token, done) {
+  console.log("token:", token);
+  User.findOne({ token }, function(err, user){
+    console.log("deserializeUser", user);
       if(!err) done(null, user);
       else done(err, null);
     });
@@ -72,4 +54,3 @@ passport.deserializeUser(function(id, done) {
 
 //tell passport to use these Strategies
 passport.use(twitterLogin)
-passport.use(jwtLogin)

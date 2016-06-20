@@ -13,7 +13,7 @@ class Nav extends Component {
   }
 
   componentWillMount() {
-    // this.props.authActions.getProfile()
+    this.props.authActions.getProfile()//TODO move to index?
   }
 
   renderLinks() {

@@ -14,11 +14,17 @@ export function twitterAuth() {
   }
 }
 
-export function authUser( token ) {
+export function getProfile() {
   return function(dispatch) { // thunk
-    localStorage.setItem('twitter_token', token)
-    dispatch({ type: AUTH_USER, payload: { } })
-    browserHistory.push('/dashboard')
+    axios.get(`${API_URL}/profile`, {
+      headers: { authorization: localStorage.getItem('twitter_token') }
+    })
+    .then(res => {
+      console.log(res.data.user)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
   }
 }
 

@@ -4,7 +4,9 @@ const bcrypt = require('bcrypt-nodejs')
 
 // Define our model
 const userSchema = new Schema({
-  profile: { id:{ type: String, unique: true }, username:String, displayName:String, img:String }
+  token: String, // NOTE better to decode token
+  profile: { id:{ type: String, unique: true }, username:String, displayName:String, img:String },
+  bulbs: Array
 })
 
 // On save Hook, encrypt password
@@ -23,14 +25,6 @@ userSchema.pre('save', function(next) { // run before save DONT DO ARROW FUNCTIO
     })
   })
 })
-
-userSchema.methods.comparePassword = function(canidatePassword, callback) {
-  bcrypt.compare(canidatePassword, this.password, (err, isMatch) => {
-    if(err)
-      return callback(err)
-    callback(null, isMatch)
-  })
-}
 
 // Create the model class
 const ModelClass = mongoose.model('user', userSchema)
