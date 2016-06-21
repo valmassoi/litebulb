@@ -1,4 +1,5 @@
 import { ADD_BULB, DELETE_BULB, LIKE_BULB, GET_BULBS } from '../actions/types'
+import _ from 'lodash'
 
 let initState = {
   allBulbs: [],
@@ -21,8 +22,8 @@ export default function(state = initState, action) {
     case DELETE_BULB:
       return {
         ...state,
-        allBulbs:_.reject(state.allBulbs, { _id: action.payload }),
-        myBulbs:_.reject(state.myBulbs, { _id: action.payload })
+        allBulbs:_.reject(state.allBulbs, { id: action.payload }),
+        myBulbs:_.reject(state.myBulbs, { id: action.payload })
       }
     case LIKE_BULB:
       return {

@@ -20,8 +20,9 @@ class NewBulb extends Component {
     e.preventDefault()
     let { title, img } = this.state
     if(checkImgUrl(img) && img!=badImg) {
-      console.log("allow save", title, img)
-      this.props.addBulb({ title, img, likes:0, id:title+img })
+      let id = this.props.user.profile.id+title+img //HACK could improve id with bcrypt?, id is used for deleting, liking
+      console.log("allow save", title, img, id)
+      this.props.addBulb({ title, img, likes:0, id })
     }
     else
       console.log("warn user")
@@ -110,4 +111,10 @@ class NewBulb extends Component {
   }
 }
 
-export default connect(null, bulbActions)(NewBulb)
+function mapStateToProps(state) {
+  return {
+    user: state.auth.user
+  }
+}
+
+export default connect(mapStateToProps, bulbActions)(NewBulb)
