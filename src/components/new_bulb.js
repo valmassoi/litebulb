@@ -21,7 +21,7 @@ class NewBulb extends Component {
     let { title, img } = this.state
     if(checkImgUrl(img) && img!=badImg) {
       console.log("allow save", title, img)
-      this.props.addBulb({ title, img })
+      this.props.addBulb({ title, img, likes:0 })
     }
     else
       console.log("warn user")

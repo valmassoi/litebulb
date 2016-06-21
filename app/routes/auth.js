@@ -18,7 +18,7 @@ module.exports = function(app) {
 
   app.get('/profile', (req, res, next) => {
     let token = req.headers.authorization
-    let id = token// decrypt token to id
+    let id = token//TODO decrypt token to id
     Authentication.profile(id, res, next)
   })
   app.post('/profile', (req, res, next) => {

@@ -18,14 +18,11 @@ class BulbList extends Component {
     let bulbs = []
 
     if (mode=="all")
-      bulbs=[{ title:"one", img:"http://www.livescience.com/images/i/000/068/093/original/tesla-coil-fermilab.jpeg?interpolation=lanczos-none&downsize=" }, { title:"two", img:"http://www.livescience.com/images/i/000/068/093/original/tesla-coil-fermilab.jpeg?interpolation=lanczos-none&downsize=" }
-    , { title:"three", img:"https://pbs.twimg.com/profile_images/378800000822867536/3f5a00acf72df93528b6bb7cd0a4fd0c.jpeg" }
-    , { title:"4", img:"http://www.livescience.com/images/i/000/068/093/original/tesla-coil-fermilab.jpeg?interpolation=lanczos-none&downsize=" }
-    , { title:"5", img:"https://pbs.twimg.com/profile_images/378800000822867536/3f5a00acf72df93528b6bb7cd0a4fd0c.jpeg" }] // HACK
+      bulbs=this.props.allBulbs
 
     if (mode=="user")
-      bulbs=[{ title:"user1", img:"http://surfburro.com/images/churrobig.png" }] // HACK
-
+      bulbs=this.props.myBulbs
+      
     let masonryOptions = {
         transitionDuration: 500
     }

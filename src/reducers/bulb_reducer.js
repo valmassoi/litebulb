@@ -1,17 +1,22 @@
-import { ADD_BULB, DELETE_BULB, LIKE_BULB } from '../actions/types'
+import { ADD_BULB, DELETE_BULB, LIKE_BULB, GET_BULBS } from '../actions/types'
 
-const initState = {
+let initState = {
   allBulbs: [],
   myBulbs: [],
 }
 
 export default function(state = initState, action) {
   switch (action.type) {
+    case GET_BULBS:
+      return {
+        ...state,
+        myBulbs: action.payload
+      }
     case ADD_BULB:
       return {
         ...state,
-        allBulbs:[action.payload, ...allBulbs],
-        myBulbs:[action.payload, ...myBulbs]
+        allBulbs:[action.payload, ...state.allBulbs],
+        myBulbs:[action.payload, ...state.myBulbs]
       }
     case DELETE_BULB:
       return {
