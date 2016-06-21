@@ -2,7 +2,7 @@ import axios from 'axios'
 import { browserHistory } from 'react-router'
 import { ADD_BULB, DELETE_BULB, LIKE_BULB, GET_ALL } from './types'
 
-let API_URL = 'http://localhost:8081'
+let API_URL = ''
 
 export function addBulb(bulb) {
   return function(dispatch) {

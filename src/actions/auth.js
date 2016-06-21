@@ -2,7 +2,7 @@ import axios from 'axios'
 import { browserHistory } from 'react-router'
 import { AUTH_USER, AUTH_ERROR, UNAUTH_USER, GET_PROFILE, GET_BULBS } from './types'
 
-let API_URL = 'http://localhost:8081' // http://localhost:8081
+let API_URL = '' // http://localhost:8081
 
 const _this = this
 
