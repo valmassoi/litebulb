@@ -44,7 +44,8 @@ class Dashboard extends Component {
             <NewBulb close={this.closeModal.bind(this)}/>
           </div>
         </Modal>
-
+        <h1>Liked Bulbs</h1>
+        <p>-- Coming Soon --</p>
       </div>
     )
   }

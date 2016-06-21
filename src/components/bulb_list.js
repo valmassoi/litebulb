@@ -11,7 +11,8 @@ class BulbList extends Component {
     this.props.deleteBulb(bulb)
   }
   likeBulb(bulb) {
-    this.props.likeBulb(bulb)//TODO .id
+    window.alert("Like feature coming soon.")
+    // this.props.likeBulb(bulb.id)
   }
 
   render() {

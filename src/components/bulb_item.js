@@ -45,7 +45,7 @@ const BulbItem = ({ bulb, mode, deleteBulb, likeBulb }) => {
   let likeBtn = null
   let empty = ''
   if(mode=="all") {
-    if(!bulb.like)
+    if(bulb.like)//TODO reverse
       empty = '-empty'
     likeBtn =(
       <p class="pull-right" onClick={() => likeBulb(bulb)}><span class={`glyphicon glyphicon-heart${empty}`} aria-label="true" style={likeStyle} /></p>
