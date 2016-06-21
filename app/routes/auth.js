@@ -13,7 +13,7 @@ module.exports = function(app) {
 
   app.get('/auth/twitter/callback', passport.authenticate('twitter', { failureRedirect: '/signin' }), (req, res) => {
     let user_id = req.user.id //TODO bcrypt
-    res.redirect('http://192.168.1.108:8080/signin?twitter_token='+user_id) //TODO bcrypt id
+    res.redirect('/signin?twitter_token='+user_id) //TODO bcrypt id
   })
 
   app.get('/profile', (req, res, next) => {
