@@ -17,7 +17,7 @@ class Nav extends Component {
   }
 
   renderLinks() {
-    const { authenticated, profile, email } = this.props
+    const { authenticated, user, email } = this.props
 
     if(!authenticated) {
       return (
@@ -29,7 +29,7 @@ class Nav extends Component {
     else {
       return (
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">hi
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{user.profile?user.profile.username:''}
           <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><Link to="dashboard" onClick={this.setCollapsed.bind(this)}>Dashboard</Link></li>
@@ -95,7 +95,7 @@ function mapStateToProps(state) {
   return {
     authenticated: state.auth.authenticated,
     email: state.auth.email,
-    profile: state.auth.profile
+    user: state.auth.user
   }
 }
 
