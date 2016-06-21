@@ -21,18 +21,18 @@ export function addBulb(bulb) {
 }
 
 export function deleteBulb(bulb) {
-  console.log("delete bulb:", bulb);
+
   return function(dispatch) {
-    // axios.post(`${API_URL}/bulb`, { bulb }, {
-    //   headers: { authorization: localStorage.getItem('twitter_token') }
-    // })
-    //   .then(res => {
+    axios.delete(`${API_URL}/bulbs/bulb/${bulb.id}`, {
+      headers: { authorization: localStorage.getItem('twitter_token') }
+    })
+      .then(res => {
         dispatch({ type: DELETE_BULB, payload: bulb.id })
 
-      // })
-      // .catch((err) => {
-      //   console.log(err);
-      // })
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 }
 

@@ -20,7 +20,7 @@ class NewBulb extends Component {
     e.preventDefault()
     let { title, img } = this.state
     if(checkImgUrl(img) && img!=badImg) {
-      let id = this.props.user.profile.id+title+img //HACK could improve id with bcrypt?, id is used for deleting, liking
+      let id = this.props.user.profile.id+Date.now()
       console.log("allow save", title, img, id)
       this.props.addBulb({ title, img, likes:0, id })
     }

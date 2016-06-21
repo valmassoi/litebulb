@@ -3,14 +3,15 @@ import { connect } from 'react-redux'
 import * as actions from '../actions/bulb'
 import BulbItem from './bulb_item'
 import Masonry from 'react-masonry-component'
+import _ from 'lodash'
 
 class BulbList extends Component {
 
   deleteBulb(bulb) {
-    this.props.deleteBulb(bulb)//TODO ._id
+    this.props.deleteBulb(bulb)
   }
   likeBulb(bulb) {
-    this.props.likeBulb(bulb)//TODO ._id
+    this.props.likeBulb(bulb)//TODO .id
   }
 
   render() {
@@ -18,11 +19,11 @@ class BulbList extends Component {
     let bulbs = []
 
     if (mode=="all")
-      bulbs=this.props.allBulbs
+      bulbs=allBulbs
 
     if (mode=="user")
-      bulbs=this.props.myBulbs
-      
+      bulbs=myBulbs
+
     let masonryOptions = {
         transitionDuration: 500
     }
@@ -38,6 +39,13 @@ class BulbList extends Component {
       >
         {
           bulbs.map((bulb, i) => {
+            if(_.some(myBulbs, myBulb => {
+                return myBulb.id === bulb.id
+              })
+            )
+              mode = 'user'
+            else
+              mode = 'all'
             return (
               <BulbItem
                 bulb={bulb}
