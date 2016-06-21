@@ -10,18 +10,16 @@ const twitterAuth = function() { // unused?
   return function(dispatch) {
     const token = localStorage.getItem('twitter_token')
     if (token) {
-      console.log("get prof",token);
       browserHistory.push('/dashboard')
       getProfile(token)
     }
     else
-      window.location = 'http://192.168.1.108:8081/auth/twitter'
+      window.location = '/auth/twitter'
   }
 }
 
 const getProfile = function(token=null) {
   return function(dispatch) {
-    console.log("getting profile", token);
     axios.get(`${API_URL}/profile`, {
       headers: { authorization: localStorage.getItem('twitter_token') }
     })
@@ -43,7 +41,6 @@ const getProfile = function(token=null) {
 
 const authUser = function(token) {
   return function(dispatch) {
-    console.log("TOKKEN", token);
      localStorage.setItem('twitter_token', token)
      dispatch({ type: AUTH_USER })
      browserHistory.push('/dashboard')

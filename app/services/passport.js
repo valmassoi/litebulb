@@ -7,7 +7,7 @@ const Authentication = require('../controllers/authentication')
 
 let localUrl = ''
 if (process.env.NODE_ENV !== 'production'){
-  localUrl = 'http://192.168.1.108:8081'
+  localUrl = ''
   require('dotenv').config()
 }
 const { SECRET_KEY, TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET, TOKEN, TOKEN_SECRET } = process.env

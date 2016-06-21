@@ -6,7 +6,7 @@ class Signin extends Component {
 
   handleFormSubmit({ email, password}) {
     // this.props.signinUser( { email, password })
-    window.location = 'http://192.168.1.108:8081/auth/twitter'
+    window.location = '/auth/twitter'
   }
 
   componentWillUnmount() {
@@ -18,12 +18,6 @@ class Signin extends Component {
     if(token)
       this.props.authUser(token)
   }
-
-  // componentWillReceiveProps(nextProps) {
-  //   const token = this.props.location.query.twitter_token
-  //   if(token)
-  //     this.props.authUser(token)
-  // }
 
   render() {
     const { handleSubmit, fields: { email, password }} = this.props

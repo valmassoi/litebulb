@@ -16,23 +16,19 @@ class Nav extends Component {
     // this.props.authActions.getProfile()//TODO move to index?
   }
   componentWillReceiveProps(nextProps) {
-    let user = nextProps.user
-    if(user!==null&&user!==undefined) {
-      let profile = user.profile
-      if(profile!==null&&profile!==undefined) {
-        let name = profile.username
-        console.log(name)
-      }
-    }
+    this.setName(nextProps)
   }
 
   componentWillUpdate(nextProps) {
-    let user = nextProps.user
+    this.setName(nextProps)
+  }
+
+  setName(props) {
+    let user = props.user
     if(user!==null&&user!==undefined) {
       let profile = user.profile
       if(profile!==null&&profile!==undefined) {
         let name = profile.username
-        console.log(name)
       }
     }
   }
@@ -43,7 +39,7 @@ class Nav extends Component {
     if(!authenticated) {
       return (
         <li class={this.loginClass} key={1}>
-          <a href="http://192.168.1.108:8081/auth/twitter" onClick={this.setCollapsed.bind(this)}>Login / Signup</a>
+          <a href="/auth/twitter" onClick={this.setCollapsed.bind(this)}>Login / Signup</a>
         </li>
       )
     }

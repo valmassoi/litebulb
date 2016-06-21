@@ -21,7 +21,6 @@ class NewBulb extends Component {
     let { title, img } = this.state
     if(checkImgUrl(img) && img!=badImg) {
       let id = this.props.user.profile.id+Date.now()
-      console.log("allow save", title, img, id)
       this.props.addBulb({ title, img, likes:0, id })
     }
     else

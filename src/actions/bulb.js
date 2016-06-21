@@ -5,7 +5,6 @@ import { ADD_BULB, DELETE_BULB, LIKE_BULB, GET_ALL } from './types'
 let API_URL = 'http://localhost:8081'
 
 export function addBulb(bulb) {
-  console.log("addBulb", bulb);
   return function(dispatch) {
     axios.post(`${API_URL}/bulbs/bulb`, { bulb }, {
       headers: { authorization: localStorage.getItem('twitter_token') }
@@ -37,7 +36,6 @@ export function deleteBulb(bulb) {
 }
 
 export function likeBulb(bulb) {
-  console.log("like bulb:", bulb);
   return function(dispatch) {
     axios.post(`${API_URL}/bulb`, { bulb }, {
       headers: { authorization: localStorage.getItem('twitter_token') }
@@ -59,7 +57,6 @@ export function getAll() {
       .then(res => {
         let bulbs = res.data.all
         bulbs = _.flatten(bulbs)
-        console.log(bulbs);
         dispatch({ type: GET_ALL, payload: bulbs})
 
       })

@@ -10,14 +10,14 @@ export default function(ComposedComponent) {
     componentWillMount() {
       if (!this.props.authenticated) {
         // this.context.router.push('/signin')
-        window.location = 'http://192.168.1.108:8081/auth/twitter'
+        window.location = '/auth/twitter'
       }
     }
 
     componentWillUpdate(nextProps) {
       if (!nextProps.authenticated) {
         // this.context.router.push('/signin')
-        window.location = 'http://192.168.1.108:8081/auth/twitter'
+        window.location = '/auth/twitter'
       }
     }
 

@@ -14,10 +14,9 @@ class BulbItem  extends Component {
   }
 
   imgError(image) {
-    console.log("err", image);
     image.onerror = ''
     image.src = 'http://i.huffpost.com/gen/1513771/thumbs/o-LIGHTBULB-facebook.jpg'
-    this.setState({image:image.src})
+    this.setState({ image:image.src })
     return true
   }
 
