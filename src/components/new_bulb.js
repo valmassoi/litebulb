@@ -25,7 +25,7 @@ class NewBulb extends Component {
       this.props.addBulb({ title, img, likes:0, id })
     }
     else
-      console.log("warn user")
+      window.alert("Image link was invalid, please try another")
     this.props.close()
   }
 

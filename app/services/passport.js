@@ -21,17 +21,15 @@ const twitterOptions = {
 //create twitter Strategy
 const twitterLogin = new TwitterStrategy(twitterOptions,
   function(TOKEN, TOKEN_SECRET, profile, cb) {
-    // console.log(profile);
+
     const userProfile = { id:profile.id, username:profile.username, displayName:profile.displayName, img:profile._json.profile_image_url }
 
     User.findOne({ 'profile.id': profile.id }, (err, user) => {
       if(err) { return cb(err, false) }
       if (user) {
-        console.log("USER exists")
         return cb(null, profile)
       }
       else {
-        console.log("no user")
         Authentication.signup(userProfile)
         return cb(null, profile)
       }
@@ -40,16 +38,16 @@ const twitterLogin = new TwitterStrategy(twitterOptions,
 )
 passport.serializeUser((token, done) => {
   done(null, token);
-});
+})
 
 passport.deserializeUser((token, done) => {
-  console.log("token:", token);
+
   User.findOne({ token }, (err, user) => {
-    console.log("deserializeUser", user);
-      if(!err) done(null, user);
-      else done(err, null);
-    });
-});
+
+      if(!err) done(null, user)
+      else done(err, null)
+    })
+})
 
 
 //tell passport to use these Strategies

@@ -19,7 +19,6 @@ exports.signup = (profile, res) => {
 }
 
 exports.profile  = (id, res, next) => {
-  console.log("profile id exp", id);
   User.findOne({ 'profile.id':id }, (err, user) => {
     res.send({ user })
   })
