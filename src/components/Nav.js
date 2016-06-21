@@ -13,7 +13,28 @@ class Nav extends Component {
   }
 
   componentWillMount() {
-    this.props.authActions.getProfile()//TODO move to index?
+    // this.props.authActions.getProfile()//TODO move to index?
+  }
+  componentWillReceiveProps(nextProps) {
+    let user = nextProps.user
+    if(user!==null&&user!==undefined) {
+      let profile = user.profile
+      if(profile!==null&&profile!==undefined) {
+        let name = profile.username
+        console.log(name)
+      }
+    }
+  }
+
+  componentWillUpdate(nextProps) {
+    let user = nextProps.user
+    if(user!==null&&user!==undefined) {
+      let profile = user.profile
+      if(profile!==null&&profile!==undefined) {
+        let name = profile.username
+        console.log(name)
+      }
+    }
   }
 
   renderLinks() {
@@ -27,9 +48,14 @@ class Nav extends Component {
       )
     }
     else {
+      let name = ''
+      if(user!==null&&user!==undefined)
+        if(user.profile!==null&&user.profile!==undefined)
+          name = user.profile.username || 'keenan'
       return (
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{user.profile?user.profile.username:''}
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+          {name}
           <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><Link to="dashboard" onClick={this.setCollapsed.bind(this)}>Dashboard</Link></li>

@@ -1,4 +1,4 @@
-import { ADD_BULB, DELETE_BULB, LIKE_BULB, GET_BULBS } from '../actions/types'
+import { ADD_BULB, DELETE_BULB, LIKE_BULB, GET_BULBS, GET_ALL } from '../actions/types'
 import _ from 'lodash'
 
 let initState = {
@@ -12,6 +12,11 @@ export default function(state = initState, action) {
       return {
         ...state,
         myBulbs: action.payload
+      }
+    case GET_ALL:
+      return {
+        ...state,
+        allBulbs: action.payload
       }
     case ADD_BULB:
       return {

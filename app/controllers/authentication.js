@@ -5,7 +5,7 @@ if (process.env.NODE_ENV !== 'production')
 const { SECRET_KEY } = process.env
 
 
-exports.signup = (profile) => {
+exports.signup = (profile, res) => {
 
     const user = new User({ //else create and save record
       profile
@@ -13,13 +13,13 @@ exports.signup = (profile) => {
 
     user.save((err) => {
       if(err) {console.log(err);}
-      // res.json({ token: tokenForUser(user) })
+      // res.json({ test:"hi" })
     })
 
 }
 
 exports.profile  = (id, res, next) => {
-
+  console.log("profile id exp", id);
   User.findOne({ 'profile.id':id }, (err, user) => {
     res.send({ user })
   })

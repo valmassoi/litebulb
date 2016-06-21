@@ -13,12 +13,17 @@ class Signin extends Component {
     this.props.authError('')
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentDidMount() {
     const token = this.props.location.query.twitter_token
-    if(token) {
+    if(token)
       this.props.authUser(token)
-    }
   }
+
+  // componentWillReceiveProps(nextProps) {
+  //   const token = this.props.location.query.twitter_token
+  //   if(token)
+  //     this.props.authUser(token)
+  // }
 
   render() {
     const { handleSubmit, fields: { email, password }} = this.props

@@ -4,6 +4,10 @@ const Bulb = require('../controllers/bulb')
 
 module.exports = function(app) {
 
+  app.get('/bulbs/all', (req, res) => {
+    Bulb.all(res)
+  })
+
   app.post('/bulbs/bulb', (req, res) => {
     let { bulb } = req.body
     let profile = req.headers.authorization

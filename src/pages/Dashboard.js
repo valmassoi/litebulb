@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
 import NewBulb from '../components/new_bulb'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import * as authActions from '../actions/auth'
+import * as bulbActions from '../actions/bulb'
 import Bulbs from '../components/bulb_list'
 import { Modal } from 'react-bootstrap'
 
@@ -9,6 +13,11 @@ class Dashboard extends Component {
     this.state = {
       showModal: false
     }
+  }
+
+  componentWillMount() {
+    this.props.authActions.getProfile()//TODO move to index?
+    this.props.bulbActions.getAll() // HACK
   }
 
   openModal(){
@@ -41,4 +50,11 @@ class Dashboard extends Component {
   }
 }
 
-export default Dashboard
+function mapDispatchToProps(dispatch) {
+  return {
+    authActions: bindActionCreators(authActions, dispatch),
+    bulbActions: bindActionCreators(bulbActions, dispatch)
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Dashboard)

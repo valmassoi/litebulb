@@ -49,7 +49,7 @@ class BulbList extends Component {
             return (
               <BulbItem
                 bulb={bulb}
-                key={bulb.title+i}
+                key={bulb.id+i}
                 mode={mode}
                 deleteBulb={bulb => this.deleteBulb(bulb)}
                 likeBulb={bulb => this.likeBulb(bulb)}

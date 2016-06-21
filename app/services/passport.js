@@ -21,13 +21,13 @@ const twitterOptions = {
 //create twitter Strategy
 const twitterLogin = new TwitterStrategy(twitterOptions,
   function(TOKEN, TOKEN_SECRET, profile, cb) {
-    console.log(profile);
+    // console.log(profile);
     const userProfile = { id:profile.id, username:profile.username, displayName:profile.displayName, img:profile._json.profile_image_url }
 
-    User.findOne({ profile: profile.id }, (err, user) => {
+    User.findOne({ 'profile.id': profile.id }, (err, user) => {
       if(err) { return cb(err, false) }
       if (user) {
-        // console.log(user)
+        console.log("USER exists")
         return cb(null, profile)
       }
       else {
@@ -38,13 +38,13 @@ const twitterLogin = new TwitterStrategy(twitterOptions,
     })
   }
 )
-passport.serializeUser(function(token, done) {
+passport.serializeUser((token, done) => {
   done(null, token);
 });
 
-passport.deserializeUser(function(token, done) {
+passport.deserializeUser((token, done) => {
   console.log("token:", token);
-  User.findOne({ token }, function(err, user){
+  User.findOne({ token }, (err, user) => {
     console.log("deserializeUser", user);
       if(!err) done(null, user);
       else done(err, null);

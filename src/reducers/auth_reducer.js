@@ -10,6 +10,7 @@ export default function(state = { user:{} }, action) {
     case AUTH_ERROR:
       return { ...state, error: action.payload }
     case GET_PROFILE:
+      console.log("GOT PROFILE,", action.payload);
       return { ...state, user: action.payload }
   }
   return state

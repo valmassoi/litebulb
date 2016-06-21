@@ -22,3 +22,18 @@ exports.delete = (profile, id, res) => {
     }
   )
 }
+
+exports.all = (res) => {
+  User.aggregate(
+    { "$group": {
+        _id: null,
+        bulbs: { $push: "$bulbs" }
+    }},
+    (err, result) => {
+      if (err) { log(err) }
+      res.send({
+        all:result[0].bulbs
+      })
+    }
+  )
+}
