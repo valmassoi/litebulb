@@ -11,16 +11,16 @@ class Dashboard extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      showModal: false
+      showModal: false,
     }
   }
 
   componentWillMount() {
-    this.props.authActions.getProfile()//TODO move to index?
+    this.props.authActions.getProfile()// TODO move to index?
     this.props.bulbActions.getAll() // HACK
   }
 
-  openModal(){
+  openModal() {
     this.setState({ showModal: true })
   }
 
@@ -31,17 +31,19 @@ class Dashboard extends Component {
   render() {
     return (
       <div>
-        <button class="btn btn-primary pull-right" onClick={this.openModal.bind(this)}>+ New Bulb</button>
+        <button class="btn btn-primary pull-right" onClick={this.openModal.bind(this)}>
+          + New Bulb
+        </button>
         <h1>My Bulbs</h1>
         <Bulbs mode="user" />
         <Modal
-          aria-labelledby='modal-label'
+          aria-labelledby="modal-label"
           show={this.state.showModal}
           onHide={this.close}
         >
           <div>
-            <h1 style={{marginLeft:"10px"}}>Create a new bulb</h1>
-            <NewBulb close={this.closeModal.bind(this)}/>
+            <h1 style={{ marginLeft: '10px' }}>Create a new bulb</h1>
+            <NewBulb close={this.closeModal.bind(this)} />
           </div>
         </Modal>
         <h1>Liked Bulbs</h1>
@@ -54,7 +56,7 @@ class Dashboard extends Component {
 function mapDispatchToProps(dispatch) {
   return {
     authActions: bindActionCreators(authActions, dispatch),
-    bulbActions: bindActionCreators(bulbActions, dispatch)
+    bulbActions: bindActionCreators(bulbActions, dispatch),
   }
 }
 

@@ -1,11 +1,10 @@
-import React, { Component } from "react"
+import React, { Component } from 'react'
 import { reduxForm } from 'redux-form'
 import * as actions from '../actions/auth'
 
 class Signin extends Component {
 
-  handleFormSubmit({ email, password}) {
-    // this.props.signinUser( { email, password })
+  handleFormSubmit({ email, password }) {
     window.location = '/auth/twitter'
   }
 
@@ -15,26 +14,31 @@ class Signin extends Component {
 
   componentDidMount() {
     const token = this.props.location.query.twitter_token
-    if(token)
+    if (token)
       this.props.authUser(token)
   }
 
   render() {
-    const { handleSubmit, fields: { email, password }} = this.props
+    const { handleSubmit, fields: { email, password } } = this.props
 
-    return(
+    return (
       <div>
         <h1>Please Use Login / Signup Button</h1>
         <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-          <fieldset className="form-group">
+          <fieldset class="form-group">
             <label>Email:</label>
-            <input {...email} placeholder="Accounts coming soon" className="form-control" />
+            <input {...email} placeholder="Accounts coming soon" class="form-control" />
           </fieldset>
-          <fieldset className="form-group">
+          <fieldset class="form-group">
             <label>Password:</label>
-            <input {...password} type="password" placeholder="Please use twitter login" className="form-control" />
+            <input
+              {...password}
+              type="password"
+              placeholder="Please use twitter login"
+              class="form-control"
+            />
           </fieldset>
-          <button action="submit" className="btn btn-primary">Login</button>
+          <button action="submit" class="btn btn-primary">Login</button>
         </form>
       </div>
     )
@@ -47,5 +51,5 @@ function mapStateToProps(state) {
 
 export default reduxForm({
   form: 'signin',
-  fields: ['email', 'password']
+  fields: ['email', 'password'],
 }, mapStateToProps, actions)(Signin)

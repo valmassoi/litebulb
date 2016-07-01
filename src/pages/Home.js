@@ -1,10 +1,10 @@
-import React, { Component } from "react"
+import React, { Component } from 'react'
 import { Link } from 'react-router'
 
 export default class Home extends Component {
 
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
 
     }
@@ -15,8 +15,7 @@ export default class Home extends Component {
   }
 
   render() {
-
-    return(
+    return (
       <div>
         <Link to="/dashboard">
           <button class="btn btn-primary pull-right">Dashboard</button>

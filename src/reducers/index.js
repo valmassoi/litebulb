@@ -6,7 +6,7 @@ import bulbReducer from './bulb_reducer'
 const rootReducer = combineReducers({
   form,
   auth: authReducer,
-  bulb: bulbReducer
+  bulb: bulbReducer,
 })
 
 export default rootReducer

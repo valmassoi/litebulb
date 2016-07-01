@@ -11,7 +11,7 @@ class BulbList extends Component {
     this.props.deleteBulb(bulb)
   }
   likeBulb(bulb) {
-    window.alert("Like feature coming soon.")
+    window.alert('Like feature coming soon.')
     // this.props.likeBulb(bulb.id)
   }
 
@@ -19,30 +19,30 @@ class BulbList extends Component {
     let { mode, myBulbs, allBulbs } = this.props
     let bulbs = []
 
-    if (mode=="all")
-      bulbs=allBulbs
+    if (mode === 'all')
+      bulbs = allBulbs
 
-    if (mode=="user")
-      bulbs=myBulbs
+    if (mode === 'user')
+      bulbs = myBulbs
 
     let masonryOptions = {
-        transitionDuration: 500
+      transitionDuration: 500,
     }
 
     return (
 
       <Masonry
-          className={'my-gallery-class'}
-          elementType={'div'}
-          options={masonryOptions}
-          disableImagesLoaded={false}
-          updateOnEachImageLoad={false}
+        class={'my-gallery-class'}
+        elementType={'div'}
+        options={masonryOptions}
+        disableImagesLoaded={false}
+        updateOnEachImageLoad={false}
       >
         {
           bulbs.map((bulb, i) => {
-            if(_.some(myBulbs, myBulb => {
-                return myBulb.id === bulb.id
-              })
+            if (_.some(myBulbs, myBulb => {
+              return myBulb.id === bulb.id
+            })
             )
               mode = 'user'
             else
@@ -50,10 +50,10 @@ class BulbList extends Component {
             return (
               <BulbItem
                 bulb={bulb}
-                key={bulb.id+i}
+                key={bulb.id + i}
                 mode={mode}
-                deleteBulb={bulb => this.deleteBulb(bulb)}
-                likeBulb={bulb => this.likeBulb(bulb)}
+                deleteBulb={b => this.deleteBulb(b)}
+                likeBulb={b => this.likeBulb(b)}
               />
             )
           })
@@ -64,12 +64,10 @@ class BulbList extends Component {
 }
 
 
-
-
 function mapStateToProps(state) {
   return {
     allBulbs: state.bulb.allBulbs,
-    myBulbs: state.bulb.myBulbs
+    myBulbs: state.bulb.myBulbs,
   }
 }
 

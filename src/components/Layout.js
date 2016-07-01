@@ -1,14 +1,13 @@
-import React, { Component } from "react"
-import { Link } from "react-router"
+import React, { Component } from 'react'
 
-import Footer from "../components/Footer"
-import Nav from "../components/Nav"
+import Footer from '../components/Footer'
+import Nav from '../components/Nav'
 
-export default class Layout extends Component {
+class Layout extends Component {
 
   render() {
     const { location } = this.props
-    return(
+    return (
       <div>
         <Nav location={location} />
         {this.props.children}
@@ -17,3 +16,5 @@ export default class Layout extends Component {
     )
   }
 }
+
+export default Layout

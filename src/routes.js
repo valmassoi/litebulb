@@ -1,10 +1,10 @@
-import React from "react"
-import { Route, IndexRoute } from "react-router"
+import React from 'react'
+import { Route, IndexRoute } from 'react-router'
 
-import Home from "./pages/Home"
-import Layout from "./components/Layout"
-import Signin from "./pages/Signin"
-import Dashboard from "./pages/Dashboard"
+import Home from './pages/Home'
+import Layout from './components/Layout'
+import Signin from './pages/Signin'
+import Dashboard from './pages/Dashboard'
 import RequireAuth from './components/require_auth'
 import NotFound from './pages/404'
 import Bulbs from './pages/Bulbs'

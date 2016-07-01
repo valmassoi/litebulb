@@ -1,5 +1,5 @@
-import React, { Component } from "react"
-import { Link, browserHistory } from "react-router"
+import React, { Component } from 'react'
+import { Link, browserHistory } from 'react-router'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as authActions from '../actions/auth'
@@ -8,7 +8,7 @@ class Nav extends Component {
   constructor() {
     super()
     this.state = {
-      collapsed: true
+      collapsed: true,
     }
   }
 
@@ -24,11 +24,11 @@ class Nav extends Component {
   }
 
   setName(props) {
-    let user = props.user
-    if(user!==null&&user!==undefined) {
-      let profile = user.profile
-      if(profile!==null&&profile!==undefined) {
-        let name = profile.username
+    const user = props.user
+    if (user !== null && user !== undefined) {
+      const profile = user.profile
+      if (profile !== null && profile !== undefined) {
+        const name = profile.username
       }
     }
   }
@@ -36,7 +36,7 @@ class Nav extends Component {
   renderLinks() {
     const { authenticated, user, email } = this.props
 
-    if(!authenticated) {
+    if (!authenticated) {
       return (
         <li class={this.loginClass} key={1}>
           <a href="/auth/twitter" onClick={this.setCollapsed.bind(this)}>Login / Signup</a>
@@ -45,8 +45,8 @@ class Nav extends Component {
     }
     else {
       let name = ''
-      if(user!==null&&user!==undefined)
-        if(user.profile!==null&&user.profile!==undefined)
+      if (user !== null && user !== undefined)
+        if (user.profile !== null && user.profile !== undefined)
           name = user.profile.username || 'keenan'
       return (
         <li class="dropdown">
@@ -76,19 +76,22 @@ class Nav extends Component {
     this.setState({ collapsed: true })
   }
 
-  render(){
+  render() {
     const { authenticated } = this.props
     const { collapsed } = this.state
 
-    const homeClass = location.pathname === "/" ? "active" : ""
-    const loginClass = location.pathname.match(/^\/signin/) ? "active" : ""
-    const navClass = collapsed ? "collapse" : ""
+    const homeClass = location.pathname === '/' ? 'active' : ''
+    const loginClass = location.pathname.match(/^\/signin/) ? 'active' : ''
+    const navClass = collapsed ? 'collapse' : ''
 
-    return(
+    return (
       <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
           <div class="navbar-header">
-            <button type="button" class="navbar-toggle" onClick={this.toggleCollapse.bind(this)}>
+            <button
+              type="button"
+              class="navbar-toggle"
+              onClick={this.toggleCollapse.bind(this)}>
               <span class="sr-only">Toggle navigation</span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
@@ -96,9 +99,11 @@ class Nav extends Component {
             </button>
             <a class="navbar-brand" href="/">Litebulb</a>
           </div>
-          <div class={"navbar-collapse " + navClass}>
+          <div class={`navbar-collapse ${navClass}`}>
             <ul class="nav navbar-nav">
-              <li class={homeClass}><Link to="/" onClick={this.setCollapsed.bind(this)}>Home</Link></li>
+              <li class={homeClass}>
+                <Link to="/" onClick={this.setCollapsed.bind(this)}>Home</Link>
+              </li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
@@ -117,13 +122,13 @@ function mapStateToProps(state) {
   return {
     authenticated: state.auth.authenticated,
     email: state.auth.email,
-    user: state.auth.user
+    user: state.auth.user,
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    authActions: bindActionCreators(authActions, dispatch)
+    authActions: bindActionCreators(authActions, dispatch),
   }
 }
 
